@@ -1,0 +1,6 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+ERGData = "b020fd72-4709-4308-af79-cb431e2a8e28"
+
+[sources]
+ERGData = {path = ".."}

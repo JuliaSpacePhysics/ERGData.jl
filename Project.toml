@@ -1,0 +1,7 @@
+name = "ERGData"
+uuid = "b020fd72-4709-4308-af79-cb431e2a8e28"
+authors = ["Beforerr <zzj956959688@gmail.com> and contributors"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.10"
