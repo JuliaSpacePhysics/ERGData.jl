@@ -1,7 +1,15 @@
 name = "ERGData"
 uuid = "b020fd72-4709-4308-af79-cb431e2a8e28"
-authors = ["Beforerr <zzj956959688@gmail.com> and contributors"]
 version = "1.0.0-DEV"
+authors = ["Beforerr <zzj956959688@gmail.com> and contributors"]
+
+[deps]
+CDFDatasets = "075ae62b-f872-4368-b383-31e3aa6c3154"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+SpaceDataModel = "0b37b92c-f0c5-4a52-bd5c-390dec20857c"
 
 [compat]
+CDFDatasets = "0.2"
+Dates = "1"
+SpaceDataModel = "0.3"
 julia = "1.10"
