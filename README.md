@@ -15,6 +15,11 @@ ds["mag_8sec_sm"]  # Access magnetic field in SM coordinates
 
 # Load orbit data
 orb = getdata(ORB[], Date(2017,3,27), Date(2017,3,28))
+
+# Ground induction magnetometer: three hourly files of one site, opened whole
+rec = getdata(ISEE_INDUCTION[site="HUS"], DateTime(2022,6,3,20), DateTime(2022,6,3,23))
+rec["db_dt"]  # (3, 64 Hz samples): H, D, Z coil voltage
+available(ISEE_INDUCTION[site="HUS"], DateTime(2022,6,3), DateTime(2022,6,4))  # hours the archive publishes
 ```
 
 ## Instruments
@@ -32,10 +37,11 @@ orb = getdata(ORB[], Date(2017,3,27), Date(2017,3,28))
 | PWE_EFD | Electric Field Detector |
 | PWE_OFA | Onboard Frequency Analyzer |
 | PWE_HFA | High Frequency Analyzer |
+| ISEE_INDUCTION | Ground induction magnetometers of the PWING network (hourly 64 Hz files per site) |
 
 ## Data Source
 
-Data is downloaded from the [ERG Science Center](https://ergsc.isee.nagoya-u.ac.jp/data/ergsc/) and cached locally in `~/.ergdata/`.
+Data is downloaded from the [ERG Science Center](https://ergsc.isee.nagoya-u.ac.jp/data/ergsc/) and cached under SpaceDataModel's data directory, `~/.cache/spacedata/` unless `SPACE_DATA_DIR` says otherwise.
 
 ## Elsewhere
 

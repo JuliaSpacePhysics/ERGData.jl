@@ -7,9 +7,11 @@ using SpaceDataModel: getdata, available
 
 export getdata, available
 export MGF, HEP, LEPe, LEPi, MEPe, MEPi, XEP, ORB, PWE_EFD, PWE_OFA, PWE_HFA
+export ISEE_INDUCTION
 
 const ERG_BASE_URL = "https://ergsc.isee.nagoya-u.ac.jp/data/ergsc"
 
 include("instruments.jl")
+include("ground.jl")
 
 end

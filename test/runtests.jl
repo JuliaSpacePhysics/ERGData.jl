@@ -39,3 +39,30 @@ end
         "https://ergsc.isee.nagoya-u.ac.jp/data/ergsc/satellite/erg/orb/pre/2017/03/erg_orb_pre_l2_20170327_v01.cdf"
 end
 
+
+@testset "PWE layouts" begin
+    @test only(remotefiles(PWE_EFD[datatype = "E64Hz"].source.pattern, Date(2022, 6, 3), Date(2022, 6, 4); version = "01_03")) ==
+        "https://ergsc.isee.nagoya-u.ac.jp/data/ergsc/satellite/erg/pwe/efd/l2/E64Hz/2022/06/erg_pwe_efd_l2_E64Hz_dsi_20220603_v01_03.cdf"
+    @test only(remotefiles(PWE_HFA[].source.pattern, Date(2022, 6, 3), Date(2022, 6, 4); version = "01_02")) ==
+        "https://ergsc.isee.nagoya-u.ac.jp/data/ergsc/satellite/erg/pwe/hfa/l2/spec/high/2022/06/erg_pwe_hfa_l2_spec_high_20220603_v01_02.cdf"
+    @test only(remotefiles(PWE_HFA[datatype = "1min"].source.pattern, Date(2022, 8, 11), Date(2022, 8, 12); version = "05_09")) ==
+        "https://ergsc.isee.nagoya-u.ac.jp/data/ergsc/satellite/erg/pwe/hfa/l3/2022/08/erg_pwe_hfa_l3_1min_20220811_v05_09.cdf"
+end
+
+@testset "ISEE induction" begin
+    ds = ISEE_INDUCTION[site = "HUS"]
+    @test ds.name == "ISEE_INDUCTION_HUS"
+    # Sites are spelled as the archive's directories are, uppercased.
+    @test_throws ArgumentError ISEE_INDUCTION[site = "hus"]
+    us = remotefiles(ds.source.pattern, DateTime(2022, 6, 3, 20), DateTime(2022, 6, 3, 23); version = "01")
+    @test length(us) == 3
+    @test first(us) ==
+        "https://ergsc.isee.nagoya-u.ac.jp/data/ergsc/ground/geomag/isee/induction/hus/2022/06/isee_induction_hus_2022060320_v01.cdf"
+    # Hours the archive publishes, from its directory listing.
+    hs = available(ISEE_INDUCTION[site = "HUS"], DateTime(2022, 6, 3, 20), DateTime(2022, 6, 3, 23))
+    @test hs == DateTime(2022, 6, 3, 20):Hour(1):DateTime(2022, 6, 3, 22)
+    # Files come back whole: 64 Hz for three hours, not clipped on the jittery epoch.
+    rec = getdata(ISEE_INDUCTION[site = "HUS"], DateTime(2022, 6, 3, 20), DateTime(2022, 6, 3, 23))
+    @test size(rec["db_dt"]) == (3, 3 * 3600 * 64)
+    @test size(rec["sensitivity"]) == (3, 120)
+end
