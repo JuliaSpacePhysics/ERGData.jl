@@ -8,7 +8,14 @@ CDFDatasets = "075ae62b-f872-4368-b383-31e3aa6c3154"
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
 SpaceDataModel = "0b37b92c-f0c5-4a52-bd5c-390dec20857c"
 
+[weakdeps]
+DSP = "717857b8-e6f2-59f4-9121-6e50c889abd2"
+
+[extensions]
+ERGDataDSPExt = "DSP"
+
 [compat]
+DSP = "0.8"
 CDFDatasets = "0.2"
 Dates = "1"
 SpaceDataModel = "0.3"

@@ -13,5 +13,6 @@ const ERG_BASE_URL = "https://ergsc.isee.nagoya-u.ac.jp/data/ergsc"
 
 include("instruments.jl")
 include("ground.jl")
+include("induction.jl")
 
 end

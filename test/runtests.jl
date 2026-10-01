@@ -66,3 +66,12 @@ end
     @test size(rec["db_dt"]) == (3, 3 * 3600 * 64)
     @test size(rec["sensitivity"]) == (3, 120)
 end
+
+@testset "Induction response tables" begin
+    using ERGData.Induction: sensitivity
+    # Float32 table rows: 0.1 Hz reads back as 0.10000000149 and must still match 0.1.
+    rec = (; freq = Float64.(Float32[0.1, 1.0]), sens = [1.0 100.0])
+    @test sensitivity(rec, 1, 0.1) ≈ 1
+    @test sensitivity(rec, 1, sqrt(0.1)) ≈ 10       # log-log, not linear
+    @test isnan(sensitivity(rec, 1, 2.0))
+end
