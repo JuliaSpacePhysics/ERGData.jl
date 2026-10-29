@@ -16,7 +16,7 @@ ERGDataDSPExt = "DSP"
 
 [compat]
 DSP = "0.8"
-CDFDatasets = "0.2"
+CDFDatasets = "0.2, 0.3, 0.4"
 Dates = "1"
-SpaceDataModel = "0.3"
+SpaceDataModel = "0.3, 0.4, 0.5, 0.6, 0.7"
 julia = "1.10"
